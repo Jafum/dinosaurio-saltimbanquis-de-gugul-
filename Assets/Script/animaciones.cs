@@ -5,6 +5,7 @@ using UnityEngine;
 public class NewBehaviourScript : MonoBehaviour
 {
     [SerializeField] Rigidbody2D rigidbody;
+    [SerializeField] GameManager gameManager;
     [SerializeField] Animator animator;
     [SerializeField] float altura;
     // Start is called before the first frame update
@@ -28,6 +29,10 @@ public class NewBehaviourScript : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         animator.SetBool("parametro1", false);
+        if (collision.transform.tag == "enemigo")
+        {
+            gameManager.perder();
+        }
     }
  
 }

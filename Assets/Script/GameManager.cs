@@ -4,18 +4,33 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] int puntuacionActual;
-    [SerializeField] int puntuacionMaxima;
-    [SerializeField] float tiempo;
+    [SerializeField] public int puntuacionActual;
+    [SerializeField] public int puntuacionMaxima;
+    [SerializeField] public float tiempo;
     // Start is called before the first frame update
-    void Start()
+     void Start()
     {
-        
+        puntuacionMaxima = PlayerPrefs.GetInt("puntuacionMaxima");
     }
-
-    // Update is called once per frame
-    void Update()
+     void Update()
     {
-        
+        tiempo += Time.deltaTime;
+    }
+    public void perder()
+    {
+
+    }
+    public void reiniciarJuego()
+    {
+
+    }
+    public void actualizarPuntuacion()
+    {
+        puntuacionActual++;
+        if (puntuacionActual > puntuacionMaxima)
+        {
+            puntuacionMaxima = puntuacionActual;
+            PlayerPrefs.SetInt("mejorPuntuacion",puntuacionMaxima);
+        }
     }
 }
