@@ -8,7 +8,7 @@ public class EnemigoControl : MonoBehaviour
     [SerializeField] Camera camara;
     [SerializeField] Vector2 posicionInicial;
     [SerializeField] Vector2 posicionFinal;
-    [SerializeField] float velocidad;
+    [SerializeField] float velocidad = 10;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,7 +24,13 @@ public class EnemigoControl : MonoBehaviour
         if (transform.position.x< posicionFinal.x)
             {
             transform.position = posicionInicial;
-            velocidad = velocidad + 1;
+            velocidad = velocidad + 0.5f;
         }
+    }
+
+    public void IniciarEnemigo()
+    {
+        transform.position = posicionInicial;
+        velocidad = 10;
     }
 }

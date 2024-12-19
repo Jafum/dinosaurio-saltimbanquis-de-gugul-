@@ -10,8 +10,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] public float tiempo;
     [SerializeField] public GameObject gameOver, botonRestart;
     [SerializeField] public GameObject jugador, enemigo;
+    [SerializeField] EnemigoControl enemigo1;
     [SerializeField] TMP_Text textoTiempo;
     [SerializeField] public bool activarCronometro = true;
+    int minutos, segundos;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,21 +23,33 @@ public class GameManager : MonoBehaviour
     }
      void Update()
     {
-        tiempo += Time.deltaTime;
-        int minutos = (int)tiempo / 60;
-        int segundos = (int)tiempo % 60;
+        
         if (activarCronometro == true)
         {
-            textoTiempo.text = $"{minutos:D2}: {segundos:D2}";
+            tiempo += Time.deltaTime;
+            minutos = (int)tiempo / 60;
+            segundos = (int)tiempo % 60;
         }
+        textoTiempo.text = $"{minutos:D2}:{segundos:D2}";
     }
     public void perder()
     {
-
+        jugador.SetActive(false);
+        enemigo.SetActive(false);
+        gameOver.SetActive(true);
+        botonRestart.SetActive(true);
+        activarCronometro = false;
     }
     public void reiniciarJuego()
     {
-
+        puntuacionActual = 0;
+        jugador.SetActive(true);
+        enemigo.SetActive(true);
+        gameOver.SetActive(false);
+        botonRestart.SetActive(false);
+        tiempo = 0;
+        activarCronometro = true;
+        enemigo1.IniciarEnemigo();
     }
     public void actualizarPuntuacion()
     {
